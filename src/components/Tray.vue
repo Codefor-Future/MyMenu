@@ -1,9 +1,13 @@
 <template>
-    <div class="tray pt-3"> 
+    <div class="tray pt-3">
+        <div class="yourOrders">
+            <!-- <p class="yourOrderLabel">Your Orders</p> -->
+            <span v-for="i in yourOrder" :key="i.name"> #{{`${i.name}(${i.count})`}}</span>
+        </div>
         <div class="" id="filter">
             <select name="catagory" id="" v-model="catagory">
-                <option value="veg">Vegitarian</option>
-                <option value="non-veg">Non vegitarian</option>
+                <option value="veg">Vegetarian</option>
+                <option value="non-veg">Non-Vegetarian</option>
             </select>
             <div class="arrow">
             </div>
@@ -16,7 +20,9 @@
                 @clicked="selectedItem=i" 
                 :itemDetails="i"
             />
-            <PopUp v-if="selectedItem" :selectedItem='selectedItem' @closePopUp="selectedItem=null"/>
+            <PopUp v-if="selectedItem" @closePopUp="selectedItem=null">
+                <SelectedFood slot="content" :selectedItem='selectedItem'/>
+            </PopUp>
         </div>
     </div>
 </template>
@@ -24,12 +30,14 @@
 <script>
 import FoodItem from './FoodItem.vue'
 import PopUp from './PopUp.vue'
+import SelectedFood from './SelectedFood.vue'
 
 
 export default {
     components:{
         FoodItem,
-        PopUp
+        PopUp,
+        SelectedFood
     },
     name:"Tray",
     data(){
@@ -39,7 +47,14 @@ export default {
         }
     },
     computed:{
-
+        yourOrder(){
+            //access selectedItems from store and return
+            return(
+                [
+                    {name:"Burger",count:3},{name:"Porata",count:3},{name:"Burger",count:3},{name:"Porata",count:3}
+                ]
+            )
+        }
     },
     methods:{
         
@@ -86,5 +101,16 @@ export default {
         margin:18px auto auto -30px;
         border: 6px solid rgba(0, 0, 0, 0);
         border-top: 6px solid rgba(13, 14, 1, 0.479);
+    }
+    .yourOrders{
+        width: 90%;
+        min-height: 70px;
+        background-color: #F3F3F3;
+        margin: 0 auto;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: .7rem;
+        line-height: .7rem;
+        color: rgba(0, 0, 0, 0.623);
     }
 </style>

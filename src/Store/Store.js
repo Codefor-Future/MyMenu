@@ -5,27 +5,27 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state:{
-        total:0,
+        total:100,
         menu:[],
         filteredMenuItems:[
             {
                 name: 'Burger',
-                desc: '[HMR] Waiting for update signal from WDS...',
+                desc: 'In addition dairy or honey.',
                 rate: 100
             },
             {
                 name: 'Porata',
-                desc: '[HMR] Waiting for update s...',
+                desc: 'In addition, a vegan diet does not include eggs, dairy or honey....',
                 rate: 30
             },
             {
                 name: 'Manthi',
-                desc: '[HMR] Waiting for update signal from WDS..jkdfj aljdo.',
+                desc: 'In addition, a vegan diet does not include eggs, dairy or honey.ignal from ',
                 rate: 500
             },
             {
                 name: 'Koya',
-                desc: '[HMR] Waiting for update signal from WDS...',
+                desc: 'In addition, a vegan diet does not include eggs, dairy or honey.',
                 rate: 10008
             }
         ],
