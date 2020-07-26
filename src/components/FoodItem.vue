@@ -25,7 +25,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .foodItem{
         width: 90%;
         min-height: 100px;
@@ -43,6 +43,7 @@ export default {
     }
     .foodImage{
         width: 100%;
+        object-fit: cover;
     }
     .details{
         flex: 3;

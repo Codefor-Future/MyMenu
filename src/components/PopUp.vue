@@ -29,7 +29,7 @@ export default {
     }
     .popUpWraper{
         width: 100%;
-        height: 55vh;
+        min-height: 40vh;
         background-color: white;
         position: fixed;
         bottom: 0;

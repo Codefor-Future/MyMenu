@@ -9,24 +9,53 @@ export default new Vuex.Store({
         menu:[],
         filteredMenuItems:[
             {
-                name: 'Burger',
-                desc: 'In addition dairy or honey.',
-                rate: 100
+                name: 'Tandoori Lamb Chops',
+                desc: 'Lamb chops marinated in strained yogurt and flavoursome masalas. Cooked till tender, this dish is guaranteed to impress.',
+                rate: 100,
+                id:1,
+                cat:"non-veg"
             },
             {
-                name: 'Porata',
-                desc: 'In addition, a vegan diet does not include eggs, dairy or honey....',
-                rate: 30
+                name: 'Keema Samosa with Yoghurt Dip',
+                desc: 'Make this ultimate Punjabi snack from scratch. Dough pockets stuffed with keema masala mixture',
+                rate: 30,
+                id:2,
+                cat:"non-veg"
             },
             {
-                name: 'Manthi',
-                desc: 'In addition, a vegan diet does not include eggs, dairy or honey.ignal from ',
-                rate: 500
+                name: 'Butter Chicken',
+                desc: 'Keeping the classic at the last! ',
+                rate: 500,
+                id:3,
+                cat:"non-veg"
             },
             {
-                name: 'Koya',
-                desc: 'In addition, a vegan diet does not include eggs, dairy or honey.',
-                rate: 10008
+                name: 'Chicken 65',
+                desc: 'Chicken 65 is said to have originated in Madras (Chennai). ',
+                rate: 10008,
+                id:4,
+                cat:"non-veg"
+            },
+            {
+                name: 'Malabar Fish Biryani',
+                desc: 'This classic Malabar Fish Biryani can be devoured at all times. Enjoy the delicious taste of this ever-charming dish.',
+                rate: 30,
+                id:5,
+                cat:"non-veg"
+            },
+            {
+                name: 'Pina Colada Pork Ribs',
+                desc: 'The ingredients of the popular rum-based cocktail team up with pork ribs to create a lip-smacking treat.',
+                rate: 500,
+                id:6,
+                cat:"non-veg"
+            },
+            {
+                name: 'Mutton Korma',
+                desc: 'A flavourful mutton curry, where the meat is stirred with curd, garlic-ginger paste, cloves, cardamom and cinnamon sticks.',
+                rate: 10,
+                id:7,
+                cat:"non-veg"
             }
         ],
         selectedCatagory:null,

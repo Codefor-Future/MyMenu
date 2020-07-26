@@ -23,8 +23,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
-  background-image: url("./assets/burger.jpg");
+  background: url("./assets/burger.jpg");
   background-position-x: center;
+  background-position-y: center;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;

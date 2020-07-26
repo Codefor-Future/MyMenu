@@ -1,8 +1,14 @@
 <template>
     <div class="tray pt-3">
-        <div class="yourOrders">
+        <div class="yourOrders" v-if="yourOrder.length">
             <!-- <p class="yourOrderLabel">Your Orders</p> -->
-            <span v-for="i in yourOrder" :key="i.name"> #{{`${i.name}(${i.count})`}}</span>
+            <span
+                v-for="i in yourOrder"
+                :key="i.item.name"
+                @click="selectedItem={item:i.item,count:i.count}"
+            >
+                #{{`${i.item.name}(${i.count})`}}
+            </span>
         </div>
         <div class="" id="filter">
             <select name="catagory" id="" v-model="catagory">
@@ -16,12 +22,12 @@
         <div class="menu">
             <FoodItem 
                 v-for="i in this.$store.state.filteredMenuItems" 
-                :key="i.name" 
-                @clicked="selectedItem=i" 
+                :key="i.id" 
+                @clicked="selectedItem={item:i,count:0}" 
                 :itemDetails="i"
             />
             <PopUp v-if="selectedItem" @closePopUp="selectedItem=null">
-                <SelectedFood slot="content" :selectedItem='selectedItem'/>
+                <SelectedFood slot="content" :selectedItem='selectedItem' @closePopUp="$emit('closePopUp')"/>
             </PopUp>
         </div>
     </div>
@@ -50,9 +56,7 @@ export default {
         yourOrder(){
             //access selectedItems from store and return
             return(
-                [
-                    {name:"Burger",count:3},{name:"Porata",count:3},{name:"Burger",count:3},{name:"Porata",count:3}
-                ]
+                this.$store.state.selectedItems
             )
         }
     },
@@ -76,7 +80,7 @@ export default {
         display: flex;
         align-items: center;
         position: sticky;
-        top: 15vh;
+        top: 90px;
         font-weight: bolder;
         font-size: 15px;
         background-color: rgb(255, 255, 255);
@@ -109,7 +113,7 @@ export default {
         margin: 0 auto;
         border-radius: 6px;
         padding: 10px;
-        font-size: .7rem;
+        font-size: .75rem;
         line-height: .7rem;
         color: rgba(0, 0, 0, 0.623);
     }

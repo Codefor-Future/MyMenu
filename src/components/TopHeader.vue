@@ -1,9 +1,9 @@
 <template>
     <div >
-        <div class="d-flex m-0 px-4 py-3 topHeader">
+        <div class="d-flex m-0 px-4 py-3" id="topHeader">
             <div>
                 <h1><span class="my">My</span> Menu</h1>
-                </div> 
+            </div> 
             <div class="text-right">
                 <h6 class="total m-0 p-0">Total</h6>
                 <h6 class=" m-0 p-0"><span class="total">$</span> <span class="amount">{{totalAmount}}</span></h6>
@@ -21,16 +21,21 @@ export default {
             //get selected elements from store,
             // add the price and return total bill.
 
-            return this.$store.state.total;
+            let total=0;
+            let selectedItems=this.$store.state.selectedItems;
+            for(let i in selectedItems){
+                total=total+selectedItems[i].item.rate*selectedItems[i].count
+            }
+            return total;
         }
     }
 }
 </script>
 
 <style scoped>
-    .topHeader{
+    #topHeader{
         z-index: 1;
-        height: 15vh;
+        height: 90px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-weight: bold;
         color: white;

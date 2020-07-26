@@ -5,14 +5,14 @@
             </div>
             <div class="details">
                 <div class="nameAndDesc">
-                    <p class="foodName">{{selectedItem.name}}</p>
+                    <p class="foodName">{{selectedItem.item.name}}</p>
                     <br>
                     <p class="desc">
-                        {{selectedItem.desc}}
+                        {{selectedItem.item.desc}}
                     </p>
                 </div>
                 <div class="priceTag">
-                    ${{selectedItem.rate}}
+                    ${{selectedItem.item.rate}}
                 </div>
             </div>
             <div class="count d-flex">
@@ -22,7 +22,7 @@
                 <div class="plus" @click="quantity=quantity+1">+</div>
             </div>
             <div class="save">
-                <button :class="{activeButton:quantity>0}">Add</button>
+                <button @click="addItem(selectedItem)" :class="{activeButton:quantity>0}">Add</button>
             </div>
     </section>
 </template>
@@ -35,13 +35,50 @@ export default {
     }),
     props:{
         selectedItem:Object
+    },
+    mounted(){
+        if(this.selectedItem.count){
+            this.quantity=this.selectedItem.count
+        }
+    },
+    methods:{
+        addItem(item){
+            item.count=this.quantity;
+            if(!item.count) {
+                let array=this.$store.state.selectedItems;
+                for(let i in array){
+                    if(array[i].item.id===item.item.id){
+                        array.splice(i,1);
+                        this.$store.state.selectedItems=array
+                        this.$parent.$emit('closePopUp');
+                        return;
+                    }
+                }
+            }
+            if(item.count){
+                let array=this.$store.state.selectedItems;
+                for(let i in array){
+                    if(array[i].item.id===item.item.id){
+                        array[i].count=item.count;
+                        this.$store.state.selectedItems=array
+                        this.$parent.$emit('closePopUp');
+                        return;
+                    }
+                }
+                this.$store.state.selectedItems.push({item:item.item,count:this.quantity})
+                
+            }
+            this.$parent.$emit('closePopUp');
+            
+            //Not a correct way !!!!!!
+        }
     }
 }
 </script>
 
 <style scoped>
     .image{
-        height: 39%;
+        height: 100px;
     }
     .foodImage{
         margin: 5%;
@@ -53,12 +90,12 @@ export default {
     }
     .details{
         width: 90%;
-        min-height: 20%;
+        max-height: 30%;
         display: flex;
         text-align: left;
         align-items: baseline;
-        padding: auto;
-        margin: 20px auto 0 auto;
+        padding: 0;
+        margin: 15px auto 0 auto;
     }
     .nameAndDesc{
         flex: 3;
@@ -66,19 +103,39 @@ export default {
     .priceTag{
         flex: 1;
         text-align: center;
+        background-color: #25ED04;
+        padding: 1px 4px 1px 4px;
+        color: white;
+        display: inline;
+        border-radius: 5px;
+        font-weight: bold;
+        margin: 0;
     }
     .count{
         background-color: #F2F2F2;
-        height: 35px;
+        height: 40px;
         width: 80%;
-        margin:auto;
+        margin:0 auto;
         /* padding:6px 0 0 6px; */
-        line-height: 35px;
+        line-height: 40px;
         text-align: center;
+    }
+    .foodName{
+        font-size: 20px;
+        padding: 0;
+        margin: 0;
+    }
+    .desc{
+        color: rgba(35, 12, 12, 0.534);
+        font-size: 13px;
+        line-height: .9rem;
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0;
     }
     .name{
         flex: 5;
-        font-size: 15px;
+        font-size: 17px;
     }
     .minus{
         flex:1;
@@ -105,11 +162,9 @@ export default {
         font-weight: bold;
         font-size: 13px;
         border:none;
-        padding: 5px 70px;
+        padding: 5px 90px;
         margin: 15px;
         border-radius: 3px;
-        /* background-color: rgba(235, 238, 38, 0.445); */
-
     }
     .activeButton{
         background-color: #EAEE26;
