@@ -1,7 +1,7 @@
 <template>
     <section class="d-inline">
             <div class="image">
-                <img src="../assets/burger.jpg" alt="Food" class="foodImage">
+                <img :src="selectedItem.item.image" alt="Food" class="foodImage">
             </div>
             <div class="details">
                 <div class="nameAndDesc">
@@ -101,6 +101,7 @@ export default {
         flex: 3;
     }
     .priceTag{
+        animation: vibrate 3s infinite;
         flex: 1;
         text-align: center;
         background-color: #25ED04;
@@ -110,6 +111,36 @@ export default {
         border-radius: 5px;
         font-weight: bold;
         margin: 0;
+    }
+    @keyframes vibrate {
+        0%{
+            transform: translateX(0px)
+        }
+        2%{
+            transform: translateX(-2px)
+        }
+        4%{
+            transform: translateX(0px)
+        }
+        6%{
+            transform: translateX(2px)
+        }
+        8%{
+            transform: translateX(0px)
+        }
+        10%{
+            transform: translateX(-2px)
+        }
+        12%{
+            transform: translateX(0px)
+        }
+        14%{
+            transform: translateX(2px)
+        }
+        16%{
+            transform: translateX(0px)
+        }
+        
     }
     .count{
         background-color: #F2F2F2;

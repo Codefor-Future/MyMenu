@@ -1,17 +1,19 @@
 <template>
-    <div class="mask">
-        <div class="popUpWraper">
-            <!-- close button -->
-            <div class="closePopUp" @click="$emit('closePopUp')">
-                <div class="barsContainer">
-                    <div class="bar1">
-                        <div class="bar2"></div>
+    <transition name="popUp">
+        <div class="mask">
+            <div class="popUpWraper">
+                <!-- close button -->
+                <div class="closePopUp" @click="$emit('closePopUp')">
+                    <div class="barsContainer">
+                        <div class="bar1">
+                            <div class="bar2"></div>
+                        </div>
                     </div>
                 </div>
+                <slot name="content"></slot>
             </div>
-            <slot name="content"></slot>
         </div>
-    </div>
+    </transition>
 </template>
 <script>
 export default {
@@ -19,6 +21,22 @@ export default {
 }
 </script>
 <style scoped>
+    .popUp-leave-active{
+        animation: popUpLeave .5s;
+    }
+    @keyframes popUpLeave {
+        0%{
+            transform: scale(1)
+        }
+        30%{
+            transform: scale(1.2);
+        }
+        100%{
+            transform: scale(0) ;
+            opacity: 0;
+            border-radius: 100px;
+        }
+    }
     .mask{
         height: 100%;
         width: 100%;

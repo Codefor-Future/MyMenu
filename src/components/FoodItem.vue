@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex mx-auto my-2 foodItem" @click="$emit('clicked')">
         <div class="image mr-1">
-            <img src="../assets/burger.jpg" alt="Food" class="foodImage">
+            <img :src="itemDetails.image" alt="Food" class="foodImage">
         </div>
         <div class="details ml-1">
             <p class="foodName">{{itemDetails.name}}</p>

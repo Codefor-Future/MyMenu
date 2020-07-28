@@ -1,6 +1,6 @@
 <template>
-    <div >
-        <div class="d-flex m-0 px-4 py-3" id="topHeader">
+    <div>
+        <div class="d-flex m-0 px-4 py-3" id="topHeader" :class="[topBarColor?'lightTheme':'darkTheme']">
             <div>
                 <h1><span class="my">My</span> Menu</h1>
             </div> 
@@ -16,6 +16,10 @@
 <script>
 export default {
     name:"TopHeader",
+    data:()=>({
+        topBarColor:false,
+        observer:null
+    }),
     computed:{
         totalAmount(){
             //get selected elements from store,
@@ -27,9 +31,23 @@ export default {
                 total=total+selectedItems[i].item.rate*selectedItems[i].count
             }
             return total;
+        },
+    },
+    mounted(){
+            var filter=document.getElementById('observe');
+
+            this.observer= new IntersectionObserver((entry)=>{
+                if(entry[0].isIntersecting){
+                    this.topBarColor=false
+                }else{
+                    this.topBarColor=true
+                }
+            }
+            ,{threshold:0,rootMargin:"-90px"});
+            this.observer.observe(filter);
         }
-    }
 }
+       
 </script>
 
 <style scoped>
@@ -38,14 +56,22 @@ export default {
         height: 90px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-weight: bold;
-        color: white;
         font-size: 24px;
         justify-content:space-between;
-        background-color: rgba(10, 0, 0, 0.986);
         position: fixed;
         top: 0;
         right: 0;
         left: 0;
+    }
+    .darkTheme{
+        background-color: rgba(10, 0, 0, 0.986);
+        color: white;
+        transition: color .25s ease-in-out;
+    }
+    .lightTheme{
+        background-color: rgb(255, 255, 255);
+        color: rgb(22, 3, 3);
+        transition:color .25s ease-in-out;
     }
     .my{
         color: rgba(235, 238, 38, 0.952);

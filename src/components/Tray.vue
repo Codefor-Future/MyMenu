@@ -10,6 +10,7 @@
                 #{{`${i.item.name}(${i.count})`}}
             </span>
         </div>
+        <div id="observe" style="height:1px"></div>
         <div class="" id="filter">
             <select name="catagory" id="" v-model="catagory">
                 <option value="veg">Vegetarian</option>
@@ -21,7 +22,7 @@
         <br>
         <div class="menu">
             <FoodItem 
-                v-for="i in this.$store.state.filteredMenuItems" 
+                v-for="i in filteredItems" 
                 :key="i.id" 
                 @clicked="selectedItem={item:i,count:0}" 
                 :itemDetails="i"
@@ -58,10 +59,24 @@ export default {
             return(
                 this.$store.state.selectedItems
             )
+        },
+        filteredItems(){
+            let selectedCat=this.$store.state.selectedCatagory
+            return(
+                this.$store.state.MenuItems.filter(function (item){
+                    return item.cat===selectedCat
+                })
+            )
+                
         }
     },
     methods:{
         
+    },
+    watch:{
+        catagory(value){
+            this.$store.state.selectedCatagory=value
+        }
     }
 }
 </script>
