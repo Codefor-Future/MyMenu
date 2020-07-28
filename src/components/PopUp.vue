@@ -28,11 +28,14 @@ export default {
         left: 0;
     }
     .popUpWraper{
-        width: 100%;
+        min-width: 300px;
+        max-width:500px;
         min-height: 40vh;
         background-color: white;
         position: fixed;
         bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
     }

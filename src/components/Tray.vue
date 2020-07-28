@@ -77,6 +77,7 @@ export default {
         border-top-left-radius: 18px;
     }
     #filter{
+        height: 45px;
         display: flex;
         align-items: center;
         position: sticky;

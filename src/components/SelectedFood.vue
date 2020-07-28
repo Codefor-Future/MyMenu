@@ -78,7 +78,7 @@ export default {
 
 <style scoped>
     .image{
-        height: 100px;
+        height: 110px;
     }
     .foodImage{
         margin: 5%;
@@ -162,7 +162,7 @@ export default {
         font-weight: bold;
         font-size: 13px;
         border:none;
-        padding: 5px 90px;
+        padding: 5px 85px;
         margin: 15px;
         border-radius: 3px;
     }
